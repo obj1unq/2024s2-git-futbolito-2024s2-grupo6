@@ -4,6 +4,7 @@ import wollok.game.*
 object lionel {
 	
 	var property position = game.at(3,5)
+	const balon = pelota
 	
 	method image() {
 		return "lionel-titular.png"
@@ -16,7 +17,20 @@ object lionel {
 	method avanzar() {
 		position = game.at((game.width() - 1).min(position.x() + 1), position.y()) 
 	}
+	method taquito() {
+		self.validarTaquito()
+		balon.position(game.at(self.nextX(), balon.position().y()))
+	}
 
+	method validarTaquito() {
+		if (balon.position() != position) {
+			self.error("Lionel no tiene una pelota")
+		}
+	}
+
+	method nextX() {
+		return 0.max(balon.position().x() - 2)
+	}
 	method patear(pelota) {
 	  self.validarPosicionPelota(pelota)
 	  pelota.pateada()
@@ -32,6 +46,7 @@ object lionel {
 	  return self.position() == pelota.position()
 	}
 	
+
 }
 
 
