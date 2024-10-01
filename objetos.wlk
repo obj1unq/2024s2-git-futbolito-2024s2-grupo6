@@ -17,7 +17,7 @@ object lionel {
 	method avanzar() {
 		position = game.at((game.width() - 1).min(position.x() + 1), position.y()) 
 	}
-	method taquito() {
+method taquito() {
 		self.validarTaquito()
 		balon.position(game.at(self.nextX(), balon.position().y()))
 	}
@@ -46,7 +46,21 @@ object lionel {
 	  return self.position() == pelota.position()
 	}
 	
+method levantarla() {
+	  if (self.validarPosicion()){
+		pelota.position(game.at(position.x(), position.y() + 1))
+		game.schedule(2000, {self.bajarPelota()})
+	  }
 
+	}
+
+	method bajarPelota() {
+			pelota.position(game.at(position.x(), position.y()))
+	}
+	method validarPosicion() {
+	  return  self.position() == pelota.position()
+	}
+	
 }
 
 
